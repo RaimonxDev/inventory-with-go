@@ -1,0 +1,16 @@
+version: 3.8
+services:
+  db:
+    image: postgre:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=GOLAND
+      - POSTGRES_USER=RAMON
+      - POSTGRES_PASSWORD=RamonGo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - 6432:5432
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
