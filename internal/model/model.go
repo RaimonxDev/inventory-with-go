@@ -15,7 +15,7 @@ type Product struct {
 	gorm.Model
 	Name        string  `gorm:"type:varchar(200); not null "`
 	Description string  `gorm:"type:varchar(200); not null"`
-	Price       float64 `gorm:"type:float(200); not null"`
+	Price       float64 `gorm:"type:float; not null"`
 	UserID      int
 }
 

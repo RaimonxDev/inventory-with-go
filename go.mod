@@ -5,6 +5,8 @@ go 1.18
 require (
 	go.uber.org/fx v1.18.1
 	gopkg.in/yaml.v3 v3.0.1
+	gorm.io/driver/postgres v1.3.10
+	gorm.io/gorm v1.23.10
 )
 
 require (
@@ -25,6 +27,4 @@ require (
 	golang.org/x/crypto v0.0.0-20220926161630-eccd6366d1be // indirect
 	golang.org/x/sys v0.0.0-20210903071746-97244b99971b // indirect
 	golang.org/x/text v0.3.7 // indirect
-	gorm.io/driver/postgres v1.3.10 // indirect
-	gorm.io/gorm v1.23.10 // indirect
 )

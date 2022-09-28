@@ -14,7 +14,19 @@ var (
 	once sync.Once
 )
 
-func newPostgresDB(s *settings.Settings) {
+func New(s *settings.Settings) *gorm.DB {
+	return newPostgresDB(s)
+}
+
+func Close() error {
+	sqlDB, err := db.DB()
+	if err != nil {
+		log.Fatal("Error closing database")
+	}
+	return sqlDB.Close()
+}
+
+func newPostgresDB(s *settings.Settings) *gorm.DB {
 	once.Do(func() {
 		var err error
 		dsn := fmt.Sprintf(
@@ -30,10 +42,11 @@ func newPostgresDB(s *settings.Settings) {
 			s.DB.Name,
 			s.DB.Port,
 		)
+		fmt.Printf("%v", dsn)
 		db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 		if err != nil {
-			log.Fatal("ERROR DATABASE")
+			log.Fatal("Error connecting to database")
 		}
-
 	})
+	return db
 }
