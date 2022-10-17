@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/RaimonxDev/inventory-with-go/settings"
 	"go.uber.org/fx"
-	"gorm.io/gorm"
 )
 
 func main() {
@@ -19,7 +18,7 @@ func main() {
 	app.Run()
 }
 
-func configureLyfeCycle(lc fx.Lifecycle, db *gorm.DB) {
+func configureLyfeCycle(lc fx.Lifecycle) {
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			fmt.Println("Starting application")
