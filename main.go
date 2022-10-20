@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"github.com/RaimonxDev/inventory-with-go/internal/database"
+	"github.com/RaimonxDev/inventory-with-go/internal/repository"
+	"github.com/RaimonxDev/inventory-with-go/internal/service"
 	"github.com/RaimonxDev/inventory-with-go/settings"
 	"go.uber.org/fx"
 )
@@ -11,22 +13,19 @@ func main() {
 	app := fx.New(
 		fx.Provide(
 			context.Background,
-			settings.New),
+			settings.New,
+			database.New,
+			repository.New,
+			service.New),
 		fx.Invoke(
-			configureLyfeCycle),
+			func(ctx context.Context, serv service.Service) {
+				err := serv.RegisterUser(
+					ctx, "ramon@ramon.com", "ramon", "Andreina_877")
+				if err != nil {
+					panic(err)
+				}
+			},
+		),
 	)
 	app.Run()
-}
-
-func configureLyfeCycle(lc fx.Lifecycle) {
-	lc.Append(fx.Hook{
-		OnStart: func(ctx context.Context) error {
-			fmt.Println("Starting application")
-			return nil
-		},
-		OnStop: func(ctx context.Context) error {
-			fmt.Println("Stopping application")
-			return nil
-		},
-	})
 }

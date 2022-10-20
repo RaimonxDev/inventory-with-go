@@ -8,7 +8,7 @@ import (
 //go:embed settings.yaml
 var settingFile []byte
 
-type DatabaseConfig struct {
+type databaseConfig struct {
 	Host     string `yaml:"HOST"`
 	Port     int    `yaml:"PORT"`
 	User     string `yaml:"USER"`
@@ -18,7 +18,7 @@ type DatabaseConfig struct {
 
 type Settings struct {
 	Port string         `yaml:"PORT"`
-	DB   DatabaseConfig `yaml:"DATABASE"`
+	DB   databaseConfig `yaml:"DATABASE"`
 }
 
 func New() (*Settings, error) {
